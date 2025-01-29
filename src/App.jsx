@@ -1,12 +1,8 @@
-import SocialMedia from './Components/SocialMedia';
 import './assets/style.css';
+import Keeper from './Components/Keeper';
 
 function App() {
-  return (
-    <div className='container'>
-      <SocialMedia />
-    </div>
-  );
+  return <Keeper />;
 }
 
 export default App;

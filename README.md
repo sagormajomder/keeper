@@ -1,12 +1,38 @@
-# Social Media
+# Keeper
 
-It is a simple social media app where user can share their thought or anything they want.
+It is a simple note taking app where user can write their thought or anything they want.
 
 ## Table of Contents
 
+- [App features](#features)
+- [Future Planning](#future-planning)
+- [Technology Used](#technology-used)
 - [Run it Locally](#run-it-locally)
 - [Screenshots](#screenshots)
 - [Necessary Links](#necessary-links)
+
+## Features
+
+In this app user get some features such as
+
+- create note
+- delete note
+- update existing note
+- search specific note
+
+## Future Planning
+
+In future, some features can be added such as
+
+- update UI for more friendly user experience
+- create note with checklist and upload photo
+- create folder to store related notes
+- add level to note
+
+## Technology Used
+
+- React v19
+- Tailwindcss v4
 
 ## Run it Locally
 
@@ -15,7 +41,7 @@ Please follow the below instructions to run this project in your machine:
 1. Clone this repository
 
    ```sh
-       git clone https://github.com/sagormajomder/social-app.git
+       git clone https://github.com/sagormajomder/keeper.git
    ```
 
 2. To run below command, your machine must have install nodejs
@@ -36,7 +62,7 @@ The app will be available on http://localhost:5173 by default.
 ## Screenshots
 
 - UX design Diagram
-  ![](./public/v1-UI.png)
+  ![](./public/v2-UI.png)
 
 - Component Breakdown diagram
   ![](./public/component-breakdown-diagram.png)
@@ -47,5 +73,6 @@ The app will be available on http://localhost:5173 by default.
 
 ## Necessary Links
 
-- Repository link: [Github repository](https://github.com/sagormajomder/social-app)
-<!-- - App live link : [tapascript-car live](https://tapascript-cars.netlify.app/) -->
+- Repository link: [Github repository](https://github.com/sagormajomder/keeper)
+- Design link: [Figma](https://www.figma.com/design/UWbWBP3YU9LEVkIUKZ9zJe/Keeper?node-id=0-1&t=HRaJ4T1wvW8JaZcj-1)
+- App live link : [keeper live](https://sm-keeper.netlify.app/)
