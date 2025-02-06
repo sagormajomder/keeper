@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import Heading from "./Common/Heading";
+import Note from "./Note";
 import NoteList from "./NoteList";
 
 NoteArea.propTypes = {
@@ -10,18 +11,36 @@ NoteArea.propTypes = {
 };
 
 function NoteArea({ noteList, search, onEditNote, onDeleteNote }) {
-  if (noteList.length === 0) return;
+  const modifiedNoteList = [];
 
-  return (
-    <section className="mb-10">
-      <Heading text="All notes" />
-      <NoteList
-        noteList={noteList}
-        search={search}
+  // updated noteList according to search
+  noteList.forEach((note) => {
+    if (note.title.toLowerCase().indexOf(search.toLowerCase()) === -1) return;
+
+    modifiedNoteList.push(
+      <Note
+        id={note.id}
+        title={note.title}
+        note={note.note}
+        key={note.id}
         onEditNote={onEditNote}
         onDeleteNote={onDeleteNote}
-      />
-    </section>
+      />,
+    );
+  });
+
+  const numNoteList = modifiedNoteList.length;
+
+  return (
+    numNoteList > 0 && (
+      <section className="mb-10">
+        <div className="flex justify-between">
+          <Heading text="All notes" />
+          <p className="text-s1">Total note: {numNoteList}</p>
+        </div>
+        <NoteList noteList={modifiedNoteList} />
+      </section>
+    )
   );
 }
 

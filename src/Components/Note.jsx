@@ -13,8 +13,9 @@ Note.propTypes = {
 function Note({ id, title, note, onEditNote, onDeleteNote }) {
   return (
     <li className="bg-primary/10 relative rounded-lg p-4 shadow-md">
-      <h3 className="text-h3 mb-1 font-semibold">{title}</h3>
+      <h3 className="text-h3 mb-1 pr-10 font-semibold">{title}</h3>
       <p>{note}</p>
+      {/* delete and update note Icons */}
       <div className="absolute top-2 right-2 flex items-center gap-2">
         <img
           className="cursor-pointer"

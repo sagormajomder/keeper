@@ -4,13 +4,13 @@ import InputField from "./Common/InputField";
 
 CreateNote.propTypes = {
   title: PropTypes.string.isRequired,
-  noteText: PropTypes.string.isRequired,
-  setTitle: PropTypes.func.isRequired,
-  setNoteText: PropTypes.func.isRequired,
+  contentText: PropTypes.string.isRequired,
+  onTitle: PropTypes.func.isRequired,
+  onContentText: PropTypes.func.isRequired,
   onAddNote: PropTypes.func.isRequired,
 };
 
-function CreateNote({ title, setTitle, noteText, setNoteText, onAddNote }) {
+function CreateNote({ title, onTitle, contentText, onContentText, onAddNote }) {
   function handleSubmitForm(e) {
     e.preventDefault();
 
@@ -19,15 +19,15 @@ function CreateNote({ title, setTitle, noteText, setNoteText, onAddNote }) {
     const newNote = {
       id: crypto.randomUUID(),
       title,
-      note: noteText,
+      note: contentText,
     };
 
     // console.log(newNote);
     onAddNote(newNote);
 
     // Clear Values
-    setTitle("");
-    setNoteText("");
+    onTitle("");
+    onContentText("");
   }
 
   return (
@@ -42,12 +42,12 @@ function CreateNote({ title, setTitle, noteText, setNoteText, onAddNote }) {
           <InputField
             placeholder="Enter note title"
             title={title}
-            onTitle={setTitle}
+            onTitle={onTitle}
           />
           <textarea
             className="bg-primary/10 focus:outline-primary/75 rounded-lg px-4 py-3"
-            value={noteText}
-            onChange={(e) => setNoteText(e.target.value)}
+            value={contentText}
+            onChange={(e) => onContentText(e.target.value)}
             placeholder="Take a note"
           />
           <button

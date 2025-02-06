@@ -6,13 +6,25 @@ import NoteArea from "./NoteArea";
 const InitialNotes = [
   {
     id: crypto.randomUUID(),
-    title: "Hello World!",
-    note: "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+    title: "Today is a great day",
+    content: "It is a sample text",
   },
   {
     id: crypto.randomUUID(),
-    title: "Today is a great day",
-    note: "It is a sample text",
+    title: "React is awesome",
+    content: "React allows us to build reusable UI components efficiently.",
+  },
+  {
+    id: crypto.randomUUID(),
+    title: "JavaScript is powerful",
+    content:
+      "JavaScript is the backbone of web development and enables dynamic interactions.",
+  },
+  {
+    id: crypto.randomUUID(),
+    title: "Stay consistent",
+    content:
+      "Consistency and practice are the keys to mastering any programming language.",
   },
 ];
 
@@ -20,7 +32,7 @@ function Keeper() {
   const [noteList, setNoteList] = useState(InitialNotes);
   const [search, setSearch] = useState("");
   const [title, setTitle] = useState("");
-  const [noteText, setNoteText] = useState("");
+  const [contentText, setContentText] = useState("");
 
   // Add new Note
   const handleAddNote = function (newNote) {
@@ -30,8 +42,9 @@ function Keeper() {
   // Edit Note
   const handleEditNote = function (id) {
     // console.log(id);
-    setTitle(noteList.find((n) => n.id === id).title);
-    setNoteText(noteList.find((n) => n.id === id).note);
+    const noteObj = noteList.find((n) => n.id === id);
+    setTitle(noteObj.title);
+    setContentText(noteObj.content);
     handleDeleteNote(id);
   };
 
@@ -47,9 +60,9 @@ function Keeper() {
       <main className="lg:px-16">
         <CreateNote
           title={title}
-          setTitle={setTitle}
-          noteText={noteText}
-          setNoteText={setNoteText}
+          onTitle={setTitle}
+          contentText={contentText}
+          onContentText={setContentText}
           onAddNote={handleAddNote}
         />
         <NoteArea
