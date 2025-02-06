@@ -19,7 +19,7 @@ function CreateNote({ title, onTitle, contentText, onContentText, onAddNote }) {
     const newNote = {
       id: crypto.randomUUID(),
       title,
-      note: contentText,
+      content: contentText,
     };
 
     // console.log(newNote);

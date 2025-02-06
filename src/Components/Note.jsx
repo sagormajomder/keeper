@@ -5,16 +5,16 @@ import Delete from "../assets/Trash.svg";
 Note.propTypes = {
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  note: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
   onEditNote: PropTypes.func.isRequired,
   onDeleteNote: PropTypes.func.isRequired,
 };
 
-function Note({ id, title, note, onEditNote, onDeleteNote }) {
+function Note({ id, title, content, onEditNote, onDeleteNote }) {
   return (
     <li className="bg-primary/10 relative rounded-lg p-4 shadow-md">
       <h3 className="text-h3 mb-1 pr-10 font-semibold">{title}</h3>
-      <p>{note}</p>
+      <p>{content}</p>
       {/* delete and update note Icons */}
       <div className="absolute top-2 right-2 flex items-center gap-2">
         <img

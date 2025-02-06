@@ -21,7 +21,7 @@ function NoteArea({ noteList, search, onEditNote, onDeleteNote }) {
       <Note
         id={note.id}
         title={note.title}
-        note={note.note}
+        content={note.content}
         key={note.id}
         onEditNote={onEditNote}
         onDeleteNote={onDeleteNote}
