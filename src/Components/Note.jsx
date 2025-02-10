@@ -3,14 +3,13 @@ import Edit from "../assets/Edit.svg";
 import Delete from "../assets/Trash.svg";
 
 Note.propTypes = {
-  id: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired,
+  note: PropTypes.object.isRequired,
   onEditNote: PropTypes.func.isRequired,
   onDeleteNote: PropTypes.func.isRequired,
 };
 
-function Note({ id, title, content, onEditNote, onDeleteNote }) {
+function Note({ onEditNote, onDeleteNote, note }) {
+  const { id, title, content } = note;
   return (
     <li className="bg-primary/10 relative rounded-lg p-4 shadow-md">
       <h3 className="text-h3 mb-1 pr-10 font-semibold">{title}</h3>

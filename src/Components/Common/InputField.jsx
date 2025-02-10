@@ -19,8 +19,7 @@ function InputField({
 }) {
   const inputValue = isSearch ? search : title;
   const inputHanlder = isSearch ? onSearch : onTitle;
-  const titleStyle =
-    "required:invalid:outline-warning bg-primary/10 focus:outline-primary/75 rounded-lg px-4 py-3 w-full";
+  const titleStyle = `bg-primary/10 focus:outline-primary/75 rounded-lg px-4 py-3 w-full`;
   const searchStyle =
     "bg-primary/10 focus:outline-primary/75 rounded-lg pl-10 py-2 w-full shadow-lg";
   return (
@@ -30,7 +29,6 @@ function InputField({
       onChange={(e) => inputHanlder(e.target.value)}
       type="text"
       placeholder={placeholder}
-      required={!isSearch}
     />
   );
 }

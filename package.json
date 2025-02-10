@@ -1,7 +1,7 @@
 {
   "name": "keeper",
   "private": true,
-  "version": "1.1.0",
+  "version": "1.2.0",
   "type": "module",
   "author": "Sagor Majomder",
   "description": "It is a simple note taking app where user can write their thought or anything they want.",

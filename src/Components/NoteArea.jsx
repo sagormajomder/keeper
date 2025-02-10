@@ -15,13 +15,15 @@ function NoteArea({ noteList, search, onEditNote, onDeleteNote }) {
 
   // updated noteList according to search
   noteList.forEach((note) => {
-    if (note.title.toLowerCase().indexOf(search.toLowerCase()) === -1) return;
+    if (
+      note.title.toLowerCase().indexOf(search.toLowerCase()) === -1 &&
+      note.content.toLowerCase().indexOf(search.toLowerCase()) === -1
+    )
+      return;
 
     modifiedNoteList.push(
       <Note
-        id={note.id}
-        title={note.title}
-        content={note.content}
+        note={note}
         key={note.id}
         onEditNote={onEditNote}
         onDeleteNote={onDeleteNote}
@@ -31,16 +33,21 @@ function NoteArea({ noteList, search, onEditNote, onDeleteNote }) {
 
   const numNoteList = modifiedNoteList.length;
 
+  if (!numNoteList)
+    return (
+      <p className="text-s1 text-center">
+        {search ? "Notes are not taken yet 💔" : "Please take some note 🥰"}
+      </p>
+    );
+
   return (
-    numNoteList > 0 && (
-      <section className="mb-10">
-        <div className="flex justify-between">
-          <Heading text="All notes" />
-          <p className="text-s1">Total note: {numNoteList}</p>
-        </div>
-        <NoteList noteList={modifiedNoteList} />
-      </section>
-    )
+    <section className="mb-10">
+      <div className="flex justify-between">
+        <Heading text="All notes" />
+        <p className="text-s1">Total note: {numNoteList}</p>
+      </div>
+      <NoteList noteList={modifiedNoteList} />
+    </section>
   );
 }
 

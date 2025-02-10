@@ -4,22 +4,25 @@ import InputField from "./Common/InputField";
 
 CreateNote.propTypes = {
   title: PropTypes.string.isRequired,
-  contentText: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
   onTitle: PropTypes.func.isRequired,
-  onContentText: PropTypes.func.isRequired,
+  onContent: PropTypes.func.isRequired,
   onAddNote: PropTypes.func.isRequired,
 };
 
-function CreateNote({ title, onTitle, contentText, onContentText, onAddNote }) {
+function CreateNote({ title, onTitle, content, onContent, onAddNote }) {
   function handleSubmitForm(e) {
     e.preventDefault();
 
-    if (title.length === 0) return;
+    if (!title && !content) {
+      alert("Please enter title or note");
+      return;
+    }
 
     const newNote = {
       id: crypto.randomUUID(),
       title,
-      content: contentText,
+      content,
     };
 
     // console.log(newNote);
@@ -27,7 +30,7 @@ function CreateNote({ title, onTitle, contentText, onContentText, onAddNote }) {
 
     // Clear Values
     onTitle("");
-    onContentText("");
+    onContent("");
   }
 
   return (
@@ -46,8 +49,8 @@ function CreateNote({ title, onTitle, contentText, onContentText, onAddNote }) {
           />
           <textarea
             className="bg-primary/10 focus:outline-primary/75 rounded-lg px-4 py-3"
-            value={contentText}
-            onChange={(e) => onContentText(e.target.value)}
+            value={content}
+            onChange={(e) => onContent(e.target.value)}
             placeholder="Take a note"
           />
           <button

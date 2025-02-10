@@ -32,7 +32,7 @@ function Keeper() {
   const [noteList, setNoteList] = useState(InitialNotes);
   const [search, setSearch] = useState("");
   const [title, setTitle] = useState("");
-  const [contentText, setContentText] = useState("");
+  const [content, setContent] = useState("");
 
   // Add new Note
   const handleAddNote = function (newNote) {
@@ -44,14 +44,14 @@ function Keeper() {
     // console.log(id);
     const noteObj = noteList.find((n) => n.id === id);
     setTitle(noteObj.title);
-    setContentText(noteObj.content);
+    setContent(noteObj.content);
     handleDeleteNote(id);
   };
 
   // Delete Note
   const handleDeleteNote = function (id) {
     // console.log(id);
-    setNoteList(noteList.filter((n) => n.id !== id));
+    setNoteList((currList) => currList.filter((n) => n.id !== id));
   };
 
   return (
@@ -61,8 +61,8 @@ function Keeper() {
         <CreateNote
           title={title}
           onTitle={setTitle}
-          contentText={contentText}
-          onContentText={setContentText}
+          content={content}
+          onContent={setContent}
           onAddNote={handleAddNote}
         />
         <NoteArea
