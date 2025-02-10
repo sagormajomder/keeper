@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import Heading from "./Common/Heading";
 import InputField from "./Common/InputField";
+import Button from "./common/Button";
 
 CreateNote.propTypes = {
   title: PropTypes.string.isRequired,
@@ -53,12 +54,12 @@ function CreateNote({ title, onTitle, content, onContent, onAddNote }) {
             onChange={(e) => onContent(e.target.value)}
             placeholder="Take a note"
           />
-          <button
-            className="bg-primary cursor-pointer self-center rounded-lg px-4 py-2 text-white"
+          <Button
+            style="bg-primary cursor-pointer self-center rounded-lg px-4 py-2 text-white"
             type="submit"
           >
-            Save note
-          </button>
+            Save Note
+          </Button>
         </form>
       </div>
     </section>
