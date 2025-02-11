@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import SearchIcon from "../assets/Search.svg";
-import InputField from "./Common/InputField";
+import InputField from "./common/InputField";
 
 Search.propTypes = {
   search: PropTypes.string.isRequired,

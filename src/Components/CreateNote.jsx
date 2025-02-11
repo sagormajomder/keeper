@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
-import Heading from "./Common/Heading";
-import InputField from "./Common/InputField";
 import Button from "./common/Button";
+import Heading from "./common/Heading";
+import InputField from "./common/InputField";
 
 CreateNote.propTypes = {
   title: PropTypes.string.isRequired,

@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 import Button from "./common/Button";
-import Heading from "./Common/Heading";
+import Heading from "./common/Heading";
 import Note from "./Note";
 import NoteList from "./NoteList";
 
