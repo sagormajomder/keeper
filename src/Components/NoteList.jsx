@@ -1,13 +1,13 @@
 import PropTypes from "prop-types";
 
 NoteList.propTypes = {
-  noteList: PropTypes.array.isRequired,
+  modifiedNoteList: PropTypes.array.isRequired,
 };
 
-function NoteList({ noteList }) {
+function NoteList({ modifiedNoteList }) {
   return (
     <ul className="grid gap-6 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
-      {noteList}
+      {modifiedNoteList}
     </ul>
   );
 }

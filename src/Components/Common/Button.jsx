@@ -9,7 +9,11 @@ Button.propTypes = {
 
 function Button({ type, style, children, onClick = () => {} }) {
   return (
-    <button type={type} className={style} onClick={onClick}>
+    <button
+      type={type}
+      className={`bg-primary cursor-pointer text-white ${style}`}
+      onClick={onClick}
+    >
       {children}
     </button>
   );

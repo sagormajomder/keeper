@@ -24,6 +24,7 @@ function CreateNote({ title, onTitle, content, onContent, onAddNote }) {
       id: crypto.randomUUID(),
       title,
       content,
+      date: new Date().getTime(),
     };
 
     // console.log(newNote);
@@ -36,7 +37,7 @@ function CreateNote({ title, onTitle, content, onContent, onAddNote }) {
 
   return (
     <section className="mb-10">
-      <Heading text="Write your note" style="text-center" />
+      <Heading text="Write your note" style="text-center mb-2" />
       <div className="flex w-full justify-center">
         <form
           action=""
@@ -54,10 +55,7 @@ function CreateNote({ title, onTitle, content, onContent, onAddNote }) {
             onChange={(e) => onContent(e.target.value)}
             placeholder="Take a note"
           />
-          <Button
-            style="bg-primary cursor-pointer self-center rounded-lg px-4 py-2 text-white"
-            type="submit"
-          >
+          <Button style="self-center rounded-lg px-4 py-2" type="submit">
             Save Note
           </Button>
         </form>

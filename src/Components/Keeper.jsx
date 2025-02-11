@@ -8,23 +8,27 @@ const InitialNotes = [
     id: crypto.randomUUID(),
     title: "Today is a great day",
     content: "It is a sample text",
+    date: 1738393206862,
   },
   {
     id: crypto.randomUUID(),
     title: "React is awesome",
     content: "React allows us to build reusable UI components efficiently.",
+    date: 1738479606862,
   },
   {
     id: crypto.randomUUID(),
     title: "JavaScript is powerful",
     content:
       "JavaScript is the backbone of web development and enables dynamic interactions.",
+    date: 1738566006862,
   },
   {
     id: crypto.randomUUID(),
     title: "Stay consistent",
     content:
       "Consistency and practice are the keys to mastering any programming language.",
+    date: 1738652406862,
   },
 ];
 
