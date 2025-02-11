@@ -1,5 +1,5 @@
-import './assets/style.css';
-import Keeper from './Components/Keeper';
+import "./assets/style.css";
+import Keeper from "./components/Keeper";
 
 function App() {
   return <Keeper />;
