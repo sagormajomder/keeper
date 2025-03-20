@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
-import Button from "./common/Button";
 import Heading from "./common/Heading";
 import Note from "./Note";
 import NoteList from "./NoteList";
+import SortedNote from "./SortedNote";
 
 NoteArea.propTypes = {
   noteList: PropTypes.array.isRequired,
@@ -34,6 +34,7 @@ function NoteArea({ noteList, search, onEditNote, onDeleteNote }) {
     );
   });
 
+  // Sort notelist
   if (sortBy === "latest") {
     modifiedNoteList = modifiedNoteList.toSorted(
       (node1, node2) => node2.props.note.date - node1.props.note.date,
@@ -58,24 +59,7 @@ function NoteArea({ noteList, search, onEditNote, onDeleteNote }) {
     <section className="mb-10">
       <div className="mb-2 flex flex-wrap items-center gap-1 sm:gap-6">
         <Heading text="All notes" />
-
-        <div className="sm:text-body text-caption flex grow-1 flex-wrap gap-2">
-          <Button
-            type="button"
-            style="rounded-sm px-3 py-1"
-            onClick={() => setSortBy("oldest")}
-          >
-            Sort by oldest
-          </Button>
-          <Button
-            type="button"
-            style=" rounded-sm px-3 py-1"
-            onClick={() => setSortBy("latest")}
-          >
-            Sort by latest
-          </Button>
-        </div>
-
+        <SortedNote setSortBy={setSortBy} />
         <p className="text-s1">Total note: {numNoteList}</p>
       </div>
       <NoteList modifiedNoteList={modifiedNoteList} />

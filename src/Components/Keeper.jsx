@@ -1,7 +1,9 @@
+import PropTypes from "prop-types";
 import { useState } from "react";
 import CreateNote from "./CreateNote";
 import Header from "./Header";
 import NoteArea from "./NoteArea";
+import Search from "./Search";
 
 const InitialNotes = [
   {
@@ -60,8 +62,10 @@ function Keeper() {
 
   return (
     <>
-      <Header search={search} onSearch={setSearch} />
-      <main className="lg:px-16">
+      <Header>
+        <Search search={search} onSearch={setSearch} />
+      </Header>
+      <Main>
         <CreateNote
           title={title}
           onTitle={setTitle}
@@ -75,9 +79,16 @@ function Keeper() {
           onEditNote={handleEditNote}
           onDeleteNote={handleDeleteNote}
         />
-      </main>
+      </Main>
     </>
   );
 }
 
 export default Keeper;
+
+Main.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+function Main({ children }) {
+  return <main className="lg:px-16">{children}</main>;
+}
