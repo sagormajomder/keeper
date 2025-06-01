@@ -1,18 +1,17 @@
-import PropTypes from "prop-types";
-import Button from "./common/Button";
-import Heading from "./common/Heading";
-import InputField from "./common/InputField";
+import type { SyntheticEvent } from "react";
+import type { CreateNoteProps } from "../types/types";
+import Button from "./Common/Button";
+import Heading from "./Common/Heading";
+import InputField from "./Common/InputField";
 
-CreateNote.propTypes = {
-  title: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired,
-  onTitle: PropTypes.func.isRequired,
-  onContent: PropTypes.func.isRequired,
-  onAddNote: PropTypes.func.isRequired,
-};
-
-function CreateNote({ title, onTitle, content, onContent, onAddNote }) {
-  function handleSubmitForm(e) {
+function CreateNote({
+  title,
+  onTitle,
+  content,
+  onContent,
+  onAddNote,
+}: CreateNoteProps) {
+  function handleSubmitForm(e: SyntheticEvent<HTMLFormElement>) {
     e.preventDefault();
 
     if (!title && !content) {
@@ -37,7 +36,7 @@ function CreateNote({ title, onTitle, content, onContent, onAddNote }) {
 
   return (
     <section className="mb-10">
-      <Heading text="Write your note" style="text-center mb-2" />
+      <Heading text="Write your note" styles="text-center mb-2" />
       <div className="flex w-full justify-center">
         <form
           action=""
@@ -55,7 +54,7 @@ function CreateNote({ title, onTitle, content, onContent, onAddNote }) {
             onChange={(e) => onContent(e.target.value)}
             placeholder="Take a note"
           />
-          <Button style="self-center rounded-lg px-4 py-2" type="submit">
+          <Button type="submit" styles="self-center rounded-lg px-4 py-2">
             Save Note
           </Button>
         </form>

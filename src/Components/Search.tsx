@@ -1,12 +1,9 @@
-import PropTypes from "prop-types";
+// import SearchIcon from "../assets/Search.svg";
 import SearchIcon from "../assets/Search.svg";
-import InputField from "./common/InputField";
+import type { SearchComponentProps } from "../types/types";
+import InputField from "./Common/InputField";
 
-Search.propTypes = {
-  search: PropTypes.string.isRequired,
-  onSearch: PropTypes.func.isRequired,
-};
-function Search({ search, onSearch }) {
+function Search({ search, onSearch }: SearchComponentProps) {
   return (
     <div className="relative flex w-full items-center sm:w-3/5">
       <img src={SearchIcon} alt="Search Icon" className="absolute left-3" />

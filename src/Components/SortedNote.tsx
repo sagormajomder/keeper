@@ -1,23 +1,19 @@
-import PropTypes from "prop-types";
-import Button from "./common/Button";
+import type { SortedNoteProps } from "../types/types";
+import Button from "./Common/Button";
 
-SortedNote.propTypes = {
-  setSortBy: PropTypes.func.isRequired,
-};
-
-function SortedNote({ setSortBy }) {
+function SortedNote({ setSortBy }: SortedNoteProps) {
   return (
     <div className="sm:text-body text-caption flex grow-1 flex-wrap gap-2">
       <Button
         type="button"
-        style="rounded-sm px-3 py-1"
+        styles="rounded-sm px-3 py-1"
         onClick={() => setSortBy("oldest")}
       >
         Sort by oldest
       </Button>
       <Button
         type="button"
-        style=" rounded-sm px-3 py-1"
+        styles=" rounded-sm px-3 py-1"
         onClick={() => setSortBy("latest")}
       >
         Sort by latest

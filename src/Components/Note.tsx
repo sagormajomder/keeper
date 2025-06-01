@@ -1,14 +1,8 @@
-import PropTypes from "prop-types";
 import Edit from "../assets/Edit.svg";
 import Delete from "../assets/Trash.svg";
+import type { NoteProps } from "../types/types";
 
-Note.propTypes = {
-  note: PropTypes.object.isRequired,
-  onEditNote: PropTypes.func.isRequired,
-  onDeleteNote: PropTypes.func.isRequired,
-};
-
-function Note({ onEditNote, onDeleteNote, note }) {
+function Note({ onEditNote, onDeleteNote, note }: NoteProps) {
   const { id, title, content } = note;
   return (
     <li className="bg-primary/10 relative rounded-lg p-4 shadow-md">

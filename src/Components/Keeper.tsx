@@ -1,5 +1,5 @@
-import PropTypes from "prop-types";
-import { useState } from "react";
+import { useState, type PropsWithChildren } from "react";
+import type { ID, POST } from "../types/types";
 import CreateNote from "./CreateNote";
 import Header from "./Header";
 import NoteArea from "./NoteArea";
@@ -41,21 +41,23 @@ function Keeper() {
   const [content, setContent] = useState("");
 
   // Add new Note
-  const handleAddNote = function (newNote) {
+  const handleAddNote = function (newNote: POST) {
     setNoteList((currList) => [...currList, newNote]);
   };
 
   // Edit Note
-  const handleEditNote = function (id) {
+  const handleEditNote = function (id: ID) {
     // console.log(id);
     const noteObj = noteList.find((n) => n.id === id);
-    setTitle(noteObj.title);
-    setContent(noteObj.content);
-    handleDeleteNote(id);
+    if (noteObj) {
+      setTitle(noteObj.title);
+      setContent(noteObj.content);
+      handleDeleteNote(id);
+    }
   };
 
   // Delete Note
-  const handleDeleteNote = function (id) {
+  const handleDeleteNote = function (id: ID) {
     // console.log(id);
     setNoteList((currList) => currList.filter((n) => n.id !== id));
   };
@@ -85,10 +87,6 @@ function Keeper() {
 }
 
 export default Keeper;
-
-Main.propTypes = {
-  children: PropTypes.node.isRequired,
-};
-function Main({ children }) {
+function Main({ children }: PropsWithChildren) {
   return <main className="lg:px-16">{children}</main>;
 }

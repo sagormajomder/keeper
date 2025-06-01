@@ -1,13 +1,12 @@
-import PropTypes from "prop-types";
+import type { Dispatch, InputHTMLAttributes, SetStateAction } from "react";
 
-InputField.propTypes = {
-  placeholder: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  onTitle: PropTypes.func.isRequired,
-  isSearch: PropTypes.bool,
-  search: PropTypes.string.isRequired,
-  onSearch: PropTypes.func.isRequired,
-};
+interface InputTypeProps extends InputHTMLAttributes<HTMLInputElement> {
+  title?: string;
+  isSearch?: boolean;
+  search?: string;
+  onTitle?: Dispatch<SetStateAction<string>>;
+  onSearch?: Dispatch<SetStateAction<string>>;
+}
 
 function InputField({
   placeholder,
@@ -16,7 +15,7 @@ function InputField({
   isSearch = false,
   search,
   onSearch,
-}) {
+}: InputTypeProps) {
   const inputValue = isSearch ? search : title;
   const inputHanlder = isSearch ? onSearch : onTitle;
   const titleStyle = `bg-primary/10 focus:outline-primary/75 rounded-lg px-4 py-3 w-full`;
@@ -26,7 +25,7 @@ function InputField({
     <input
       className={isSearch ? searchStyle : titleStyle}
       value={inputValue}
-      onChange={(e) => inputHanlder(e.target.value)}
+      onChange={(e) => inputHanlder && inputHanlder(e.target.value)}
       type="text"
       placeholder={placeholder}
     />

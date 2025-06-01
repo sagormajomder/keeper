@@ -1,9 +1,6 @@
-import PropTypes from "prop-types";
-Header.propTypes = {
-  children: PropTypes.node.isRequired,
-};
+import type { PropsWithChildren } from "react";
 
-function Header({ children }) {
+function Header({ children }: PropsWithChildren) {
   return (
     <header className="mb-10 items-center gap-10 sm:flex">
       <h1 className="text-h1 text-primary text-center font-bold">Keeper</h1>
