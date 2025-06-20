@@ -1,23 +1,23 @@
-import type { Dispatch, InputHTMLAttributes, SetStateAction } from "react";
-
-interface InputTypeProps extends InputHTMLAttributes<HTMLInputElement> {
+type InputFieldProps = React.ComponentPropsWithoutRef<"input"> & {
+  placeholder: string;
   title?: string;
   isSearch?: boolean;
   search?: string;
-  onTitle?: Dispatch<SetStateAction<string>>;
-  onSearch?: Dispatch<SetStateAction<string>>;
-}
+  dispatch: React.Dispatch<{
+    type: string;
+    payload: string;
+  }>;
+};
 
 function InputField({
   placeholder,
   title,
-  onTitle,
   isSearch = false,
   search,
-  onSearch,
-}: InputTypeProps) {
+  dispatch,
+}: InputFieldProps) {
   const inputValue = isSearch ? search : title;
-  const inputHanlder = isSearch ? onSearch : onTitle;
+  const inputActionType = isSearch ? "searchNotes" : "addNoteTitle";
   const titleStyle = `bg-primary/10 focus:outline-primary/75 rounded-lg px-4 py-3 w-full`;
   const searchStyle =
     "bg-primary/10 focus:outline-primary/75 rounded-lg pl-10 py-2 w-full shadow-lg";
@@ -25,7 +25,12 @@ function InputField({
     <input
       className={isSearch ? searchStyle : titleStyle}
       value={inputValue}
-      onChange={(e) => inputHanlder && inputHanlder(e.target.value)}
+      onChange={(e) =>
+        dispatch({
+          type: inputActionType,
+          payload: e.target.value,
+        })
+      }
       type="text"
       placeholder={placeholder}
     />

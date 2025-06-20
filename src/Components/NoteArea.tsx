@@ -5,12 +5,7 @@ import Note from "./Note";
 import NoteList from "./NoteList";
 import SortedNote from "./SortedNote";
 
-function NoteArea({
-  noteList,
-  search,
-  onEditNote,
-  onDeleteNote,
-}: NoteAreaProps) {
+function NoteArea({ noteList, search, dispatch }: NoteAreaProps) {
   const [sortBy, setSortBy] = useState("latest");
 
   const filteredNotes = noteList
@@ -23,12 +18,7 @@ function NoteArea({
     .sort((a, b) => (sortBy === "latest" ? b.date - a.date : a.date - b.date));
 
   const modifiedNoteList: JSX.Element[] = filteredNotes.map((note) => (
-    <Note
-      note={note}
-      key={note.id}
-      onEditNote={onEditNote}
-      onDeleteNote={onDeleteNote}
-    />
+    <Note note={note} key={note.id} dispatch={dispatch} />
   ));
 
   const numNoteList = modifiedNoteList.length;

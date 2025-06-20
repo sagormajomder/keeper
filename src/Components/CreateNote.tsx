@@ -1,17 +1,19 @@
-import type { SyntheticEvent } from "react";
-import type { CreateNoteProps } from "../types/types";
+import type { POST } from "../types/types";
 import Button from "./Common/Button";
 import Heading from "./Common/Heading";
 import InputField from "./Common/InputField";
 
-function CreateNote({
-  title,
-  onTitle,
-  content,
-  onContent,
-  onAddNote,
-}: CreateNoteProps) {
-  function handleSubmitForm(e: SyntheticEvent<HTMLFormElement>) {
+type CreateNoteProps = {
+  title: string;
+  content: string;
+  dispatch: React.Dispatch<{
+    type: string;
+    payload: POST | string;
+  }>;
+};
+
+function CreateNote({ title, content, dispatch }: CreateNoteProps) {
+  function handleSubmitForm(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     if (!title && !content) {
@@ -25,13 +27,7 @@ function CreateNote({
       content,
       date: new Date().getTime(),
     };
-
-    // console.log(newNote);
-    onAddNote(newNote);
-
-    // Clear Values
-    onTitle("");
-    onContent("");
+    dispatch({ type: "addNote", payload: newNote });
   }
 
   return (
@@ -46,12 +42,14 @@ function CreateNote({
           <InputField
             placeholder="Enter note title"
             title={title}
-            onTitle={onTitle}
+            dispatch={dispatch}
           />
           <textarea
             className="bg-primary/10 focus:outline-primary/75 rounded-lg px-4 py-3"
             value={content}
-            onChange={(e) => onContent(e.target.value)}
+            onChange={(e) =>
+              dispatch({ type: "addNoteContent", payload: e.target.value })
+            }
             placeholder="Take a note"
           />
           <Button type="submit" styles="self-center rounded-lg px-4 py-2">

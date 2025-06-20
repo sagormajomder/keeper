@@ -1,9 +1,15 @@
-// import SearchIcon from "../assets/Search.svg";
 import SearchIcon from "../assets/Search.svg";
-import type { SearchComponentProps } from "../types/types";
 import InputField from "./Common/InputField";
 
-function Search({ search, onSearch }: SearchComponentProps) {
+type SearchComponentProps = {
+  search: string;
+  dispatch: React.Dispatch<{
+    type: string;
+    payload: string;
+  }>;
+};
+
+function Search({ search, dispatch }: SearchComponentProps) {
   return (
     <div className="relative flex w-full items-center sm:w-3/5">
       <img src={SearchIcon} alt="Search Icon" className="absolute left-3" />
@@ -11,7 +17,7 @@ function Search({ search, onSearch }: SearchComponentProps) {
         placeholder="Search"
         search={search}
         isSearch={true}
-        onSearch={onSearch}
+        dispatch={dispatch}
       />
     </div>
   );

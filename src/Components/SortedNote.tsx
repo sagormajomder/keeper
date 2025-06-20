@@ -1,5 +1,7 @@
-import type { SortedNoteProps } from "../types/types";
 import Button from "./Common/Button";
+type SortedNoteProps = {
+  setSortBy: React.Dispatch<React.SetStateAction<string>>;
+};
 
 function SortedNote({ setSortBy }: SortedNoteProps) {
   return (

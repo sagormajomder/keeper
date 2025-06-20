@@ -1,9 +1,16 @@
-import { useState, type PropsWithChildren } from "react";
+import { useReducer } from "react";
 import type { ID, POST } from "../types/types";
 import CreateNote from "./CreateNote";
 import Header from "./Header";
 import NoteArea from "./NoteArea";
 import Search from "./Search";
+
+type AppState = {
+  noteList: POST[];
+  search: string;
+  title: string;
+  content: string;
+};
 
 const InitialNotes = [
   {
@@ -34,59 +41,80 @@ const InitialNotes = [
   },
 ];
 
-function Keeper() {
-  const [noteList, setNoteList] = useState(InitialNotes);
-  const [search, setSearch] = useState("");
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+const initialState = {
+  noteList: InitialNotes,
+  search: "",
+  title: "",
+  content: "",
+};
 
-  // Add new Note
-  const handleAddNote = function (newNote: POST) {
-    setNoteList((currList) => [...currList, newNote]);
-  };
+function reducer(
+  state: AppState,
+  action: { type: string; payload: POST | string | ID },
+): AppState {
+  switch (action.type) {
+    case "searchNotes":
+      return {
+        ...state,
+        search: action.payload as string,
+      };
+    case "addNoteTitle":
+      return {
+        ...state,
+        title: action.payload as string,
+      };
+    case "addNoteContent":
+      return {
+        ...state,
+        content: action.payload as string,
+      };
+    case "addNote":
+      return {
+        ...state,
+        noteList: [...state.noteList, action.payload as POST],
+        title: "",
+        content: "",
+      };
+    case "editNote": {
+      const noteObj = state.noteList.find((note) => note.id === action.payload);
 
-  // Edit Note
-  const handleEditNote = function (id: ID) {
-    // console.log(id);
-    const noteObj = noteList.find((n) => n.id === id);
-    if (noteObj) {
-      setTitle(noteObj.title);
-      setContent(noteObj.content);
-      handleDeleteNote(id);
+      return {
+        ...state,
+        noteList: state.noteList.filter((note) => note.id !== action.payload),
+        title: noteObj ? noteObj.title : "",
+        content: noteObj ? noteObj.content : "",
+      };
     }
-  };
 
-  // Delete Note
-  const handleDeleteNote = function (id: ID) {
-    // console.log(id);
-    setNoteList((currList) => currList.filter((n) => n.id !== id));
-  };
+    case "deleteNote":
+      return {
+        ...state,
+        noteList: state.noteList.filter((note) => note.id !== action.payload),
+      };
+    default:
+      throw new Error("Unknown Action");
+  }
+}
 
+function Keeper() {
+  const [{ search, title, content, noteList }, dispatch] = useReducer(
+    reducer,
+    initialState,
+  );
   return (
     <>
       <Header>
-        <Search search={search} onSearch={setSearch} />
+        <Search search={search} dispatch={dispatch} />
       </Header>
       <Main>
-        <CreateNote
-          title={title}
-          onTitle={setTitle}
-          content={content}
-          onContent={setContent}
-          onAddNote={handleAddNote}
-        />
-        <NoteArea
-          search={search}
-          noteList={noteList}
-          onEditNote={handleEditNote}
-          onDeleteNote={handleDeleteNote}
-        />
+        <CreateNote title={title} content={content} dispatch={dispatch} />
+        <NoteArea search={search} noteList={noteList} dispatch={dispatch} />
       </Main>
     </>
   );
 }
 
 export default Keeper;
-function Main({ children }: PropsWithChildren) {
+function Main({ children }: React.PropsWithChildren) {
   return <main className="lg:px-16">{children}</main>;
 }

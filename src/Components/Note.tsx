@@ -1,8 +1,17 @@
 import Edit from "../assets/Edit.svg";
 import Delete from "../assets/Trash.svg";
-import type { NoteProps } from "../types/types";
+import type { ID, POST } from "../types/types";
 
-function Note({ onEditNote, onDeleteNote, note }: NoteProps) {
+type NoteType = Omit<POST, "date">;
+type NoteProps = {
+  note: NoteType;
+  dispatch: React.Dispatch<{
+    type: string;
+    payload: ID;
+  }>;
+};
+
+function Note({ note, dispatch }: NoteProps) {
   const { id, title, content } = note;
   return (
     <li className="bg-primary/10 relative rounded-lg p-4 shadow-md">
@@ -14,13 +23,13 @@ function Note({ onEditNote, onDeleteNote, note }: NoteProps) {
           className="cursor-pointer"
           src={Edit}
           alt="edit icon"
-          onClick={() => onEditNote(id)}
+          onClick={() => dispatch({ type: "editNote", payload: id })}
         />
         <img
           className="cursor-pointer"
           src={Delete}
           alt="delete icon"
-          onClick={() => onDeleteNote(id)}
+          onClick={() => dispatch({ type: "deleteNote", payload: id })}
         />
       </div>
     </li>
