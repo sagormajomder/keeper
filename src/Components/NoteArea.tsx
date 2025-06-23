@@ -1,6 +1,6 @@
 import { useState, type JSX } from "react";
 import type { NoteAreaProps } from "../types/types";
-import Heading from "./Common/Heading";
+import Heading from "./common/Heading";
 import Note from "./Note";
 import NoteList from "./NoteList";
 import SortedNote from "./SortedNote";

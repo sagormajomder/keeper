@@ -1,4 +1,4 @@
-import Button from "./Common/Button";
+import Button from "./common/Button";
 type SortedNoteProps = {
   setSortBy: React.Dispatch<React.SetStateAction<string>>;
 };

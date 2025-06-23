@@ -1,16 +1,19 @@
 import { useReducer } from "react";
+import CreateNote from "../components/CreateNote";
+import Header from "../components/Header";
+import NoteArea from "../components/NoteArea";
+import Search from "../components/Search";
+import User from "../components/User";
 import type { ID, POST } from "../types/types";
-import CreateNote from "./CreateNote";
-import Header from "./Header";
-import NoteArea from "./NoteArea";
-import Search from "./Search";
 
-type AppState = {
+type initialStateType = {
   noteList: POST[];
   search: string;
   title: string;
   content: string;
 };
+
+type ActionType = { type: string; payload: POST | string | ID };
 
 const InitialNotes = [
   {
@@ -48,34 +51,31 @@ const initialState = {
   content: "",
 };
 
-function reducer(
-  state: AppState,
-  action: { type: string; payload: POST | string | ID },
-): AppState {
+function reducer(state: initialStateType, action: ActionType) {
   switch (action.type) {
-    case "searchNotes":
+    case "note/searched":
       return {
         ...state,
         search: action.payload as string,
       };
-    case "addNoteTitle":
+    case "note/titleAdded":
       return {
         ...state,
         title: action.payload as string,
       };
-    case "addNoteContent":
+    case "note/contentAdded":
       return {
         ...state,
         content: action.payload as string,
       };
-    case "addNote":
+    case "note/created":
       return {
         ...state,
         noteList: [...state.noteList, action.payload as POST],
         title: "",
         content: "",
       };
-    case "editNote": {
+    case "note/edited": {
       const noteObj = state.noteList.find((note) => note.id === action.payload);
 
       return {
@@ -86,7 +86,7 @@ function reducer(
       };
     }
 
-    case "deleteNote":
+    case "note/deleted":
       return {
         ...state,
         noteList: state.noteList.filter((note) => note.id !== action.payload),
@@ -96,7 +96,7 @@ function reducer(
   }
 }
 
-function Keeper() {
+function AppLayout() {
   const [{ search, title, content, noteList }, dispatch] = useReducer(
     reducer,
     initialState,
@@ -105,6 +105,7 @@ function Keeper() {
     <>
       <Header>
         <Search search={search} dispatch={dispatch} />
+        <User />
       </Header>
       <Main>
         <CreateNote title={title} content={content} dispatch={dispatch} />
@@ -114,7 +115,7 @@ function Keeper() {
   );
 }
 
-export default Keeper;
+export default AppLayout;
 function Main({ children }: React.PropsWithChildren) {
   return <main className="lg:px-16">{children}</main>;
 }

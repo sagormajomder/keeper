@@ -1,7 +1,6 @@
 import type { POST } from "../types/types";
-import Button from "./Common/Button";
-import Heading from "./Common/Heading";
-import InputField from "./Common/InputField";
+import Button from "./common/Button";
+import Heading from "./common/Heading";
 
 type CreateNoteProps = {
   title: string;
@@ -27,7 +26,7 @@ function CreateNote({ title, content, dispatch }: CreateNoteProps) {
       content,
       date: new Date().getTime(),
     };
-    dispatch({ type: "addNote", payload: newNote });
+    dispatch({ type: "note/created", payload: newNote });
   }
 
   return (
@@ -39,16 +38,23 @@ function CreateNote({ title, content, dispatch }: CreateNoteProps) {
           onSubmit={handleSubmitForm}
           className="flex flex-col gap-2 sm:basis-5/6 lg:basis-1/2"
         >
-          <InputField
+          <input
+            className="bg-primary/10 focus:outline-primary/75 w-full rounded-lg px-4 py-3"
+            type="text"
+            value={title}
             placeholder="Enter note title"
-            title={title}
-            dispatch={dispatch}
+            onChange={(e) =>
+              dispatch({
+                type: "note/titleAdded",
+                payload: e.target.value,
+              })
+            }
           />
           <textarea
             className="bg-primary/10 focus:outline-primary/75 rounded-lg px-4 py-3"
             value={content}
             onChange={(e) =>
-              dispatch({ type: "addNoteContent", payload: e.target.value })
+              dispatch({ type: "note/contentAdded", payload: e.target.value })
             }
             placeholder="Take a note"
           />

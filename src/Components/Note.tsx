@@ -23,13 +23,13 @@ function Note({ note, dispatch }: NoteProps) {
           className="cursor-pointer"
           src={Edit}
           alt="edit icon"
-          onClick={() => dispatch({ type: "editNote", payload: id })}
+          onClick={() => dispatch({ type: "note/edited", payload: id })}
         />
         <img
           className="cursor-pointer"
           src={Delete}
           alt="delete icon"
-          onClick={() => dispatch({ type: "deleteNote", payload: id })}
+          onClick={() => dispatch({ type: "note/deleted", payload: id })}
         />
       </div>
     </li>
