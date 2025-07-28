@@ -62,14 +62,13 @@ The app will be available on http://localhost:5173 by default.
 ## Screenshots
 
 - UX design Diagram
-  ![](./public/v2-UI.png)
+  ![](./res/v2-UI.png)
 
 - Component Breakdown diagram
-  ![](./public/component-breakdown-diagram.png)
+  ![](./res/component-breakdown-diagram.png)
 
 - Component Hierarchy diagram
-  ![](./public/component-hierarchy-diagram.png)
-  ![](./public/component-hierarchy-diagram-state-props.png)
+  ![](./res/component-hierarchy-diagram.png)
 
 ## Necessary Links
 
