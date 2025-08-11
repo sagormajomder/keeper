@@ -12,7 +12,7 @@ type CreateNoteProps = {
 };
 
 function CreateNote({ title, content, dispatch }: CreateNoteProps) {
-  function handleSubmitForm(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmitForm(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     if (!title && !content) {
@@ -24,8 +24,16 @@ function CreateNote({ title, content, dispatch }: CreateNoteProps) {
       id: crypto.randomUUID(),
       title,
       content,
-      date: new Date().getTime(),
     };
+
+    // await fetch("http://localhost:3000/app", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(newNote),
+    // });
+
     dispatch({ type: "note/created", payload: newNote });
   }
 
@@ -34,7 +42,7 @@ function CreateNote({ title, content, dispatch }: CreateNoteProps) {
       <Heading text="Write your note" styles="text-center mb-2" />
       <div className="flex w-full justify-center">
         <form
-          action=""
+          action="http://localhost:3000/app"
           onSubmit={handleSubmitForm}
           className="flex flex-col gap-2 sm:basis-5/6 lg:basis-1/2"
         >

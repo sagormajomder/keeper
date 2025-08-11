@@ -1,10 +1,11 @@
 export type ID = `${string}-${string}-${string}-${string}-${string}`;
 
 export type POST = {
-  id: ID;
+  id?: ID;
   title: string;
   content: string;
-  date: number;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type NoteAreaProps = {
