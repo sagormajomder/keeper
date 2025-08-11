@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+@theme {
+  /* Font System */
+  --font-inter: "Inter", sans-serif ;
+
+  --default-font-family: var(--font-inter), var(--font-sans);
+
+  --text-h1: 2.6875rem;
+  --text-h2: 2.125rem;
+  --text-h3: 1.6875rem;
+
+  --text-s1: 1.375rem;
+  --text-s2: 1.125rem;
+
+  --text-body: 1.125rem;
+  --text-caption: 0.6875rem;
+  /* Color System */
+  --color-primary: #4c6ef5;
+  --color-danger: #f03e3e;
+  --color-warning: #f59f00;
+  
+  --color-black: #333;
+}
