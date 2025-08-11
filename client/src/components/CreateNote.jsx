@@ -2,6 +2,8 @@ import Button from "./common/Button";
 import Heading from "./common/Heading";
 import InputField from "./common/InputField";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 // CreateNote.propTypes = {
 //   title: PropTypes.string.isRequired,
 //   content: PropTypes.string.isRequired,
@@ -23,10 +25,8 @@ function CreateNote({ title, onTitle, content, onContent, onAddNote }) {
       id: crypto.randomUUID(),
       title,
       content,
-      date: new Date().getTime(),
     };
 
-    // console.log(newNote);
     onAddNote(newNote);
 
     // Clear Values

@@ -1,48 +1,69 @@
-// import PropTypes from "prop-types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CreateNote from "./CreateNote";
 import Header from "./Header";
 import NoteArea from "./NoteArea";
 import Search from "./Search";
 
-const InitialNotes = [
-  {
-    id: crypto.randomUUID(),
-    title: "Today is a great day",
-    content: "It is a sample text",
-    date: 1738393206862,
-  },
-  {
-    id: crypto.randomUUID(),
-    title: "React is awesome",
-    content: "React allows us to build reusable UI components efficiently.",
-    date: 1738479606862,
-  },
-  {
-    id: crypto.randomUUID(),
-    title: "JavaScript is powerful",
-    content:
-      "JavaScript is the backbone of web development and enables dynamic interactions.",
-    date: 1738566006862,
-  },
-  {
-    id: crypto.randomUUID(),
-    title: "Stay consistent",
-    content:
-      "Consistency and practice are the keys to mastering any programming language.",
-    date: 1738652406862,
-  },
-];
+const API_URL = import.meta.env.VITE_API_URL;
+
+// const InitialNotes = [
+//   {
+//     id: crypto.randomUUID(),
+//     title: "Today is a great day",
+//     content: "It is a sample text",
+//     createdAt: "2025-08-11T06:50:37.455Z",
+//     updatedAt: "2025-08-11T06:50:37.455Z",
+//   },
+//   {
+//     id: crypto.randomUUID(),
+//     title: "React is awesome",
+//     content: "React allows us to build reusable UI components efficiently.",
+//     createdAt: "2025-07-11T06:50:37.455Z",
+//     updatedAt: "2025-07-11T06:50:37.455Z",
+//   },
+//   {
+//     id: crypto.randomUUID(),
+//     title: "JavaScript is powerful",
+//     content:
+//       "JavaScript is the backbone of web development and enables dynamic interactions.",
+//     createdAt: "2025-06-11T06:50:37.455Z",
+//     updatedAt: "2025-06-11T06:50:37.455Z",
+//   },
+//   {
+//     id: crypto.randomUUID(),
+//     title: "Stay consistent",
+//     content:
+//       "Consistency and practice are the keys to mastering any programming language.",
+//     createdAt: "2025-05-11T06:50:37.455Z",
+//     updatedAt: "2025-05-11T06:50:37.455Z",
+//   },
+// ];
 
 function Keeper() {
-  const [noteList, setNoteList] = useState(InitialNotes);
+  const [noteList, setNoteList] = useState([]);
   const [search, setSearch] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
   // Add new Note
-  const handleAddNote = function (newNote) {
-    setNoteList((currList) => [...currList, newNote]);
+  const handleAddNote = async function (newNote) {
+    try {
+      const res = await fetch(`${API_URL}/notes`, {
+        method: "POST",
+        body: JSON.stringify(newNote),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!res.ok) throw new Error("Failed to creating new note");
+
+      const { data: note } = await res.json();
+
+      setNoteList((currList) => [...currList, note]);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   // Edit Note
@@ -55,10 +76,43 @@ function Keeper() {
   };
 
   // Delete Note
-  const handleDeleteNote = function (id) {
-    // console.log(id);
-    setNoteList((currList) => currList.filter((n) => n.id !== id));
+  const handleDeleteNote = async function (noteID) {
+    try {
+      const res = await fetch(`${API_URL}/notes`, {
+        method: "DELETE",
+        body: JSON.stringify({ noteID }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!res.ok) throw new Error("Failed to deleting a note");
+
+      const { id } = await res.json();
+
+      setNoteList((currList) => currList.filter((n) => n.id !== id));
+    } catch (error) {
+      console.log(error.message);
+    }
   };
+
+  // Get all notes from DB
+  useEffect(function () {
+    try {
+      async function getNoteList() {
+        const res = await fetch(`${API_URL}/notes`);
+        if (!res.ok) throw new Error("Failed to getting notes");
+
+        const { data } = await res.json();
+
+        setNoteList(data);
+      }
+
+      getNoteList();
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
 
   return (
     <>
@@ -86,9 +140,6 @@ function Keeper() {
 
 export default Keeper;
 
-// Main.propTypes = {
-//   children: PropTypes.node.isRequired,
-// };
 function Main({ children }) {
   return <main className="lg:px-16">{children}</main>;
 }

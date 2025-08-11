@@ -1,5 +1,10 @@
 import express from 'express';
-import { getNotes, postNotes } from '../controllers/note.controller.js';
+import {
+  deleteNote,
+  getNotes,
+  getSeedData,
+  postNotes,
+} from '../controllers/note.controller.js';
 
 export const noteRouter = express.Router();
 
@@ -14,3 +19,6 @@ noteRouter.post('/notes', postNotes);
 // Update Notes
 
 // Delete notes
+noteRouter.delete('/notes', deleteNote);
+// SEED DATA
+noteRouter.get('/seedData', getSeedData);
