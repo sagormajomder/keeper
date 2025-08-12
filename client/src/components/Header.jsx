@@ -1,8 +1,3 @@
-// import PropTypes from "prop-types";
-// Header.propTypes = {
-//   children: PropTypes.node.isRequired,
-// };
-
 function Header({ children }) {
   return (
     <header className="mb-10 items-center gap-10 sm:flex">

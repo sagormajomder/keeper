@@ -1,9 +1,5 @@
 import Button from "./common/Button";
 
-// SortedNote.propTypes = {
-//   setSortBy: PropTypes.func.isRequired,
-// };
-
 function SortedNote({ setSortBy }) {
   return (
     <div className="sm:text-body text-caption flex grow-1 flex-wrap gap-2">

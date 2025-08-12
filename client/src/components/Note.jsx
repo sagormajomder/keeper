@@ -1,12 +1,6 @@
 import Edit from "../assets/Edit.svg";
 import Delete from "../assets/Trash.svg";
 
-// Note.propTypes = {
-//   note: PropTypes.object.isRequired,
-//   onEditNote: PropTypes.func.isRequired,
-//   onDeleteNote: PropTypes.func.isRequired,
-// };
-
 function Note({ onEditNote, onDeleteNote, note }) {
   const { id, title, content } = note;
 

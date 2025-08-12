@@ -4,46 +4,31 @@ import Note from "./Note";
 import NoteList from "./NoteList";
 import SortedNote from "./SortedNote";
 
-// NoteArea.propTypes = {
-//   noteList: PropTypes.array.isRequired,
-//   search: PropTypes.string.isRequired,
-//   onEditNote: PropTypes.func.isRequired,
-//   onDeleteNote: PropTypes.func.isRequired,
-// };
-
 function NoteArea({ noteList, search, onEditNote, onDeleteNote }) {
   const [sortBy, setSortBy] = useState("latest");
-  let modifiedNoteList = [];
 
-  // updated noteList according to search
-  noteList.forEach((note) => {
-    if (
-      note.title.toLowerCase().indexOf(search.toLowerCase()) === -1 &&
-      note.content.toLowerCase().indexOf(search.toLowerCase()) === -1
+  const filteredNotes = noteList
+    .filter(
+      (note) =>
+        note.title.toLowerCase().includes(search.toLowerCase()) ||
+        note.content.toLowerCase().includes(search.toLowerCase()),
     )
-      return;
+    .sort((a, b) =>
+      sortBy === "latest"
+        ? new Date(b.createdAt).getMilliseconds() -
+          new Date(a.createdAt).getMilliseconds()
+        : new Date(a.createdAt).getMilliseconds() -
+          new Date(b.createdAt).getMilliseconds(),
+    );
 
-    modifiedNoteList.push(
-      <Note
-        note={note}
-        key={note.id}
-        onEditNote={onEditNote}
-        onDeleteNote={onDeleteNote}
-      />,
-    );
-  });
-
-  // Sort notelist
-  if (sortBy === "latest") {
-    modifiedNoteList = modifiedNoteList.toSorted(
-      (node1, node2) => node2.props.note.date - node1.props.note.date,
-    );
-  }
-  if (sortBy === "oldest") {
-    modifiedNoteList = modifiedNoteList.toSorted(
-      (node1, node2) => node1.date - node2.date,
-    );
-  }
+  const modifiedNoteList = filteredNotes.map((note) => (
+    <Note
+      note={note}
+      key={note.id}
+      onEditNote={onEditNote}
+      onDeleteNote={onDeleteNote}
+    />
+  ));
 
   const numNoteList = modifiedNoteList.length;
 

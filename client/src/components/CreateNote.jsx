@@ -2,16 +2,6 @@ import Button from "./common/Button";
 import Heading from "./common/Heading";
 import InputField from "./common/InputField";
 
-const API_URL = import.meta.env.VITE_API_URL;
-
-// CreateNote.propTypes = {
-//   title: PropTypes.string.isRequired,
-//   content: PropTypes.string.isRequired,
-//   onTitle: PropTypes.func.isRequired,
-//   onContent: PropTypes.func.isRequired,
-//   onAddNote: PropTypes.func.isRequired,
-// };
-
 function CreateNote({ title, onTitle, content, onContent, onAddNote }) {
   function handleSubmitForm(e) {
     e.preventDefault();

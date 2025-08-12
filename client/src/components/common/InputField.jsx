@@ -1,14 +1,3 @@
-// import PropTypes from "prop-types";
-
-// InputField.propTypes = {
-//   placeholder: PropTypes.string.isRequired,
-//   title: PropTypes.string.isRequired,
-//   onTitle: PropTypes.func.isRequired,
-//   isSearch: PropTypes.bool,
-//   search: PropTypes.string.isRequired,
-//   onSearch: PropTypes.func.isRequired,
-// };
-
 function InputField({
   placeholder,
   title,
