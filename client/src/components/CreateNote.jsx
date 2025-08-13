@@ -33,10 +33,12 @@ function CreateNote({ title, onTitle, content, onContent, onAddNote }) {
           onSubmit={handleSubmitForm}
           className="flex flex-col gap-2 sm:basis-5/6 lg:basis-1/2"
         >
-          <InputField
+          <input
+            type="text"
             placeholder="Enter note title"
-            title={title}
-            onTitle={onTitle}
+            value={title}
+            className="bg-primary/10 focus:outline-primary/75 w-full rounded-lg px-4 py-3"
+            onChange={(e) => onTitle(e.target.value)}
           />
           <textarea
             className="bg-primary/10 focus:outline-primary/75 rounded-lg px-4 py-3"
