@@ -1,6 +1,5 @@
 import Button from "./common/Button";
 import Heading from "./common/Heading";
-import InputField from "./common/InputField";
 
 function CreateNote({ title, onTitle, content, onContent, onAddNote }) {
   function handleSubmitForm(e) {

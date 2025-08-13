@@ -1,46 +1,15 @@
 import { useEffect, useState } from "react";
-import CreateNote from "./CreateNote";
-import Header from "./Header";
-import NoteArea from "./NoteArea";
-import Search from "./Search";
+import CreateNote from "../components/CreateNote";
+import Header from "../components/Header";
+import NoteArea from "../components/NoteArea";
+import Search from "../components/Search";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-// const InitialNotes = [
-//   {
-//     id: crypto.randomUUID(),
-//     title: "Today is a great day",
-//     content: "It is a sample text",
-//     createdAt: "2025-08-11T06:50:37.455Z",
-//     updatedAt: "2025-08-11T06:50:37.455Z",
-//   },
-//   {
-//     id: crypto.randomUUID(),
-//     title: "React is awesome",
-//     content: "React allows us to build reusable UI components efficiently.",
-//     createdAt: "2025-07-11T06:50:37.455Z",
-//     updatedAt: "2025-07-11T06:50:37.455Z",
-//   },
-//   {
-//     id: crypto.randomUUID(),
-//     title: "JavaScript is powerful",
-//     content:
-//       "JavaScript is the backbone of web development and enables dynamic interactions.",
-//     createdAt: "2025-06-11T06:50:37.455Z",
-//     updatedAt: "2025-06-11T06:50:37.455Z",
-//   },
-//   {
-//     id: crypto.randomUUID(),
-//     title: "Stay consistent",
-//     content:
-//       "Consistency and practice are the keys to mastering any programming language.",
-//     createdAt: "2025-05-11T06:50:37.455Z",
-//     updatedAt: "2025-05-11T06:50:37.455Z",
-//   },
-// ];
-
-function Keeper() {
-  const [noteList, setNoteList] = useState([]);
+export default function Dashboard() {
+  const [noteList, setNoteList] = useState(
+    () => JSON.parse(localStorage.getItem("data")) || [],
+  );
   const [search, setSearch] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -106,6 +75,9 @@ function Keeper() {
         const { data } = await res.json();
 
         setNoteList(data);
+
+        // set data into localstorage
+        localStorage.setItem("data", JSON.stringify(data));
       }
 
       getNoteList();
@@ -138,8 +110,39 @@ function Keeper() {
   );
 }
 
-export default Keeper;
-
 function Main({ children }) {
   return <main className="lg:px-16">{children}</main>;
 }
+
+// const InitialNotes = [
+//   {
+//     id: crypto.randomUUID(),
+//     title: "Today is a great day",
+//     content: "It is a sample text",
+//     createdAt: "2025-08-11T06:50:37.455Z",
+//     updatedAt: "2025-08-11T06:50:37.455Z",
+//   },
+//   {
+//     id: crypto.randomUUID(),
+//     title: "React is awesome",
+//     content: "React allows us to build reusable UI components efficiently.",
+//     createdAt: "2025-07-11T06:50:37.455Z",
+//     updatedAt: "2025-07-11T06:50:37.455Z",
+//   },
+//   {
+//     id: crypto.randomUUID(),
+//     title: "JavaScript is powerful",
+//     content:
+//       "JavaScript is the backbone of web development and enables dynamic interactions.",
+//     createdAt: "2025-06-11T06:50:37.455Z",
+//     updatedAt: "2025-06-11T06:50:37.455Z",
+//   },
+//   {
+//     id: crypto.randomUUID(),
+//     title: "Stay consistent",
+//     content:
+//       "Consistency and practice are the keys to mastering any programming language.",
+//     createdAt: "2025-05-11T06:50:37.455Z",
+//     updatedAt: "2025-05-11T06:50:37.455Z",
+//   },
+// ];

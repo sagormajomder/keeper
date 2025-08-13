@@ -1,7 +1,18 @@
-import Keeper from "./components/Keeper";
+import { BrowserRouter, Route, Routes } from "react-router";
+import Dashboard from "./pages/Dashboard";
+import Login from "./pages/Login";
+import NotFoundPage from "./pages/NotFoundPage";
+import Register from "./pages/Register";
 
-function App() {
-  return <Keeper />;
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route index element={<Register />} />
+        <Route path="login" element={<Login />} />
+        <Route path="app" element={<Dashboard />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
-
-export default App;
