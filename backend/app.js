@@ -1,10 +1,13 @@
 import cors from 'cors';
 import express from 'express';
+import passport from 'passport';
 import { noteRouter } from './routes/note.route.js';
+import { userRouter } from './routes/user.route.js';
 
 const app = express();
 
 app.use(cors());
+app.use(passport.initialize());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -16,6 +19,9 @@ app.get('/', (req, res) => {
   });
 });
 
+// user router
+app.use(userRouter);
+
 // Note Router
 app.use('/api/v1', noteRouter);
 
@@ -25,8 +31,6 @@ app.use((req, res, next) => {
     success: false,
     message: 'Invalid route. Resources not found',
   });
-
-  next();
 });
 
 // Server Error Route
