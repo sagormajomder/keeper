@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import Form from "../components/common/Form";
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -8,18 +10,80 @@ export default function Login() {
 
   const navigate = useNavigate();
 
-  function handleLoginSubmit(e) {
-    e.preventDefault();
+  async function handleLoginSubmit(e) {
+    try {
+      e.preventDefault();
 
-    if (!email || !password) return;
-    console.log("hello");
+      if (!email || !password) return;
 
-    navigate("/app");
+      const res = await fetch(`${API_URL}/login`, {
+        method: "POST",
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-    // clear values
-    setEmail("");
-    setPassword("");
+      console.log(res);
+
+      if (!res.ok && res.status !== 404 && res.status !== 401)
+        throw new Error("Failed to Login user");
+
+      const data = await res.json();
+      console.log(data);
+
+      if (!data.success) {
+        navigate("/login");
+        throw new Error(data.message);
+      }
+
+      if (data.success) {
+        localStorage.setItem("token", data.token);
+        navigate("/app");
+
+        // clear values
+        setEmail("");
+        setPassword("");
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
   }
+  // Check authorization
+  useEffect(
+    function () {
+      try {
+        const token = localStorage.getItem("token");
+
+        async function checkAuth() {
+          const res = await fetch(`${API_URL}/app`, {
+            method: "GET",
+            headers: {
+              Authorization: token,
+            },
+          });
+
+          if (!res.ok) {
+            navigate("/login");
+            throw new Error("You are not authorize to access the page");
+          }
+
+          const auth = await res.json();
+          console.log(auth);
+          navigate("/app");
+        }
+
+        checkAuth();
+      } catch (error) {
+        console.log(error.message);
+      }
+    },
+    [navigate],
+  );
+
   return (
     <form onSubmit={handleLoginSubmit}>
       <p>Enter Login Details</p>
@@ -28,6 +92,7 @@ export default function Login() {
         setEmail={setEmail}
         password={password}
         setPassword={setPassword}
+        buttonText="Login"
       />
     </form>
   );

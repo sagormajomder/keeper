@@ -9,7 +9,7 @@ export async function registerUser(req, res) {
     const { email, password } = req.body;
     const user = await UserModel.findOne({ email });
     if (user) {
-      return res.status(400).json({
+      return res.status(409).json({
         success: false,
         message: 'User already existed',
       });
@@ -54,7 +54,7 @@ export async function loginUser(req, res) {
     const match = await bcrypt.compare(password, user.password);
 
     if (!match) {
-      return res.status(400).json({
+      return res.status(401).json({
         success: false,
         message: 'User email or password is incorrect',
       });

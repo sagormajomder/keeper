@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import CreateNote from "../components/CreateNote";
 import Header from "../components/Header";
 import NoteArea from "../components/NoteArea";
 import Search from "../components/Search";
+import User from "../components/User";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -14,10 +16,12 @@ export default function Dashboard() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
+  const navigate = useNavigate();
+
   // Add new Note
   const handleAddNote = async function (newNote) {
     try {
-      const res = await fetch(`${API_URL}/notes`, {
+      const res = await fetch(`${API_URL}/api/v1/notes`, {
         method: "POST",
         body: JSON.stringify(newNote),
         headers: {
@@ -47,7 +51,7 @@ export default function Dashboard() {
   // Delete Note
   const handleDeleteNote = async function (noteID) {
     try {
-      const res = await fetch(`${API_URL}/notes`, {
+      const res = await fetch(`${API_URL}/api/v1/notes`, {
         method: "DELETE",
         body: JSON.stringify({ noteID }),
         headers: {
@@ -69,7 +73,7 @@ export default function Dashboard() {
   useEffect(function () {
     try {
       async function getNoteList() {
-        const res = await fetch(`${API_URL}/notes`);
+        const res = await fetch(`${API_URL}/api/v1/notes`);
         if (!res.ok) throw new Error("Failed to getting notes");
 
         const { data } = await res.json();
@@ -86,10 +90,42 @@ export default function Dashboard() {
     }
   }, []);
 
+  // Check authorization
+  useEffect(
+    function () {
+      try {
+        const token = localStorage.getItem("token");
+
+        async function checkAuth() {
+          const res = await fetch(`${API_URL}/app`, {
+            method: "GET",
+            headers: {
+              Authorization: token,
+            },
+          });
+
+          if (!res.ok) {
+            navigate("/login");
+            throw new Error("You are not authorize to access the page");
+          }
+
+          const auth = await res.json();
+          console.log(auth);
+        }
+
+        checkAuth();
+      } catch (error) {
+        console.log(error.message);
+      }
+    },
+    [navigate],
+  );
+
   return (
     <>
       <Header>
         <Search search={search} onSearch={setSearch} />
+        <User />
       </Header>
       <Main>
         <CreateNote

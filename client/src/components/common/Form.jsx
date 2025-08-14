@@ -1,6 +1,12 @@
 import Button from "./Button";
 
-export default function Form({ email, setEmail, password, setPassword }) {
+export default function Form({
+  email,
+  setEmail,
+  password,
+  setPassword,
+  buttonText,
+}) {
   return (
     <>
       <div className="mb-4">
@@ -29,7 +35,7 @@ export default function Form({ email, setEmail, password, setPassword }) {
       </div>
 
       <Button type="submit" style="px-4 py-1 rounded-sm">
-        Login
+        {buttonText}
       </Button>
     </>
   );
