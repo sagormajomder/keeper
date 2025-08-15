@@ -27,13 +27,13 @@ export default function Login() {
         },
       });
 
-      console.log(res);
+      // console.log(res);
 
       if (!res.ok && res.status !== 404 && res.status !== 401)
         throw new Error("Failed to Login user");
 
       const data = await res.json();
-      console.log(data);
+      // console.log(data);
 
       if (!data.success) {
         navigate("/login");
@@ -68,15 +68,19 @@ export default function Login() {
 
           if (!res.ok) {
             navigate("/login");
-            throw new Error("You are not authorize to access the page");
+            throw new Error(
+              `You are not authorize to access the dashboard page. StatusCode : ${res.status}`,
+            );
           }
 
-          const auth = await res.json();
-          console.log(auth);
+          await res.json();
+          // console.log(auth);
           navigate("/app");
         }
 
-        checkAuth();
+        if (token) {
+          checkAuth();
+        }
       } catch (error) {
         console.log(error.message);
       }

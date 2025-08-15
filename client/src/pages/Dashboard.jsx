@@ -106,16 +106,22 @@ export default function Dashboard() {
 
           if (!res.ok) {
             navigate("/login");
-            throw new Error("You are not authorize to access the page");
+            throw new Error(`Error happen. statuscode: ${res.status}`);
           }
 
-          const auth = await res.json();
-          console.log(auth);
+          await res.json();
+          // console.log(auth);
         }
 
-        checkAuth();
+        if (token) {
+          checkAuth();
+        } else {
+          navigate("/login");
+          throw new Error("You are not authorize to access the dashboard page");
+        }
       } catch (error) {
         console.log(error.message);
+        console.log(error);
       }
     },
     [navigate],

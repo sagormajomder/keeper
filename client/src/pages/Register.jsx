@@ -68,18 +68,23 @@ export default function Register() {
           });
 
           if (!res.ok) {
-            navigate("/");
-            throw new Error("You are not authorize to access the page");
+            navigate("/register");
+            throw new Error(
+              `You are not authorize to access the dashboard page. StatusCode : ${res.status}`,
+            );
           }
 
-          const auth = await res.json();
-          console.log(auth);
+          await res.json();
+          // console.log(auth);
           navigate("/app");
         }
 
-        checkAuth();
+        if (token) {
+          checkAuth();
+        }
       } catch (error) {
         console.log(error.message);
+        console.log(error);
       }
     },
     [navigate],
