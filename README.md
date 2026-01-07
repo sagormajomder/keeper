@@ -31,6 +31,7 @@ In future, some features can be added such as
 
 ## Technology Used
 
+- NextJs v16
 - React v19
 - Tailwindcss v4
 
@@ -59,16 +60,16 @@ Please follow the below instructions to run this project in your machine:
 
 The app will be available on http://localhost:5173 by default.
 
-## Screenshots
+<!-- ## Screenshots -->
 
-- UX design Diagram
-  ![](./res/v2-UI.png)
+<!-- - UX design Diagram -->
+  <!-- ![](./res/v2-UI.png) -->
 
-- Component Breakdown diagram
-  ![](./res/component-breakdown-diagram.png)
+<!-- - Component Breakdown diagram -->
+  <!-- ![](./res/component-breakdown-diagram.png) -->
 
-- Component Hierarchy diagram
-  ![](./res/component-hierarchy-diagram.png)
+<!-- - Component Hierarchy diagram -->
+  <!-- ![](./res/component-hierarchy-diagram.png) -->
 
 ## Necessary Links
 
