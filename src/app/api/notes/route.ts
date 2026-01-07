@@ -2,7 +2,7 @@ import { mongoConnect } from '@/lib/mongoConnect';
 import { NOTE } from '@/types/type';
 import { NextRequest, NextResponse } from 'next/server';
 
-// Get All Note
+// Get All Notes
 export async function GET() {
   try {
     const { db, client } = await mongoConnect();
@@ -21,7 +21,7 @@ export async function GET() {
   }
 }
 
-// Note Create
+// Create Note
 export async function POST(req: NextRequest) {
   try {
     const { db, client } = await mongoConnect();
