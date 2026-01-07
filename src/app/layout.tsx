@@ -3,6 +3,7 @@ import Footer from '@/components/layouts/Footer';
 import Header from '@/components/layouts/Header';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import { Toaster } from 'react-hot-toast';
 import './globals.css';
 
 const inter = Inter({
@@ -22,15 +23,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
-      <body
-        className={`${inter.className} antialiased grid grid-rows-[auto_1fr_auto] min-h-dvh`}>
-        <Header />
-        <Container>
-          <main>{children}</main>
-        </Container>
-        <Footer />
-      </body>
-    </html>
+    <>
+      <html lang='en'>
+        <body
+          className={`${inter.className} antialiased grid grid-rows-[auto_1fr_auto] min-h-dvh`}>
+          <Header />
+          <Container>
+            <main className='w-full'>{children}</main>
+          </Container>
+          <Footer />
+        </body>
+      </html>
+      <Toaster />
+    </>
   );
 }
