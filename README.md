@@ -85,4 +85,5 @@ The app will be available on http://localhost:5173 by default.
 
 - Repository link: [Github repository](https://github.com/sagormajomder/keeper)
 - Design link: [Figma](https://www.figma.com/design/UWbWBP3YU9LEVkIUKZ9zJe/Keeper?node-id=0-1&t=HRaJ4T1wvW8JaZcj-1)
-- App live link : [keeper live](https://sm-keeper.netlify.app/)
+<!-- - App live link : [keeper live](https://sm-keeper.netlify.app/) -->
+- Live link : [keeper live](keeper-sm.vercel.app/)
