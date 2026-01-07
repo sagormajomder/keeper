@@ -53,6 +53,16 @@ Please follow the below instructions to run this project in your machine:
       npm install
   ```
 
+- Set up environment variables:
+  Create a .env file in the root directory and add the following environment variables:
+
+  ```
+  // Example .env file
+  NODE_ENV=development
+  NEXT_PUBLIC_API_URL=http://localhost:3000
+  MONGODB_URI=<get from mongodb>
+  ```
+
 - Run the project
   ```sh
       npm run dev
