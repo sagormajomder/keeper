@@ -3,10 +3,12 @@
 import { Button } from '@/components/ui/button';
 import Heading from '@/components/ui/Heading';
 import { NOTE } from '@/types/type';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
 export default function CreateNote() {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -31,6 +33,7 @@ export default function CreateNote() {
     if (result.id) {
       toast.success('Note is created Successfully');
       reset();
+      router.refresh();
     }
   }
   return (
