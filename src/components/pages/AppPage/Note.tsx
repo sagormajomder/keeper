@@ -19,6 +19,14 @@ export default function Note({ note }: Readonly<{ key: string; note: NOTE }>) {
     }
   }
 
+  function handleNoteEdit() {
+    router.push(`/?edit=${id}`);
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }
+
   return (
     <li className='bg-primary/10 relative rounded-lg p-4 shadow-md'>
       <h3 className='text-h3 mb-1 pr-10 font-semibold'>{noteTitle}</h3>
@@ -27,9 +35,12 @@ export default function Note({ note }: Readonly<{ key: string; note: NOTE }>) {
       <div className='absolute top-2 right-2 flex items-center gap-2'>
         <Trash
           onClick={() => handleNoteDelete(id)}
-          className='text-destructive'
+          className='text-destructive cursor-pointer  hover:text-chart-1 transition-colors'
         />
-        <Pencil className='text-chart-5' />
+        <Pencil
+          onClick={handleNoteEdit}
+          className='text-chart-5 cursor-pointer hover:text-chart-4 transition-colors'
+        />
       </div>
     </li>
   );
