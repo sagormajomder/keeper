@@ -5,7 +5,7 @@ export default function AppPage() {
   return (
     <div className='py-10 space-y-10'>
       <CreateNote />
-      {/* <NoteArea /> */}
+      <NoteArea />
     </div>
   );
 }
