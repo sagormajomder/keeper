@@ -70,20 +70,20 @@ Please follow the below instructions to run this project in your machine:
 
 The app will be available on http://localhost:5173 by default.
 
-<!-- ## Screenshots -->
+## Screenshots
 
-<!-- - UX design Diagram -->
-  <!-- ![](./res/v2-UI.png) -->
+- UX design Diagram
+  ![](./res/v2-UI.png)
 
-<!-- - Component Breakdown diagram -->
-  <!-- ![](./res/component-breakdown-diagram.png) -->
+- Component Breakdown diagram
+  ![](./res/component-breakdown-diagram.png)
 
-<!-- - Component Hierarchy diagram -->
-  <!-- ![](./res/component-hierarchy-diagram.png) -->
+- Component Hierarchy diagram
+  ![](./res/component-hierarchy-diagram.png)
 
 ## Necessary Links
 
 - Repository link: [Github repository](https://github.com/sagormajomder/keeper)
 - Design link: [Figma](https://www.figma.com/design/UWbWBP3YU9LEVkIUKZ9zJe/Keeper?node-id=0-1&t=HRaJ4T1wvW8JaZcj-1)
-<!-- - App live link : [keeper live](https://sm-keeper.netlify.app/) -->
 - Live link : [keeper live](keeper-sm.vercel.app/)
+<!-- - App live link : [keeper live](https://sm-keeper.netlify.app/) -->
