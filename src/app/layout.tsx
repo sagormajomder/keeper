@@ -26,10 +26,10 @@ export default function RootLayout({
     <>
       <html lang='en'>
         <body
-          className={`${inter.className} antialiased grid grid-rows-[auto_1fr_auto] min-h-dvh`}>
+          className={`${inter.className} antialiased grid grid-rows-[auto_1fr_auto] min-h-dvh bg-background text-foreground`}>
           <Header />
           <Container>
-            <main className='w-full'>{children}</main>
+            <main className='w-min-0'>{children}</main>
           </Container>
           <Footer />
         </body>

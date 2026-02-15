@@ -4,11 +4,11 @@ import { Button } from '@/components/ui/button';
 import Heading from '@/components/ui/Heading';
 import { NOTE } from '@/types/type';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { Suspense, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
-function CreateNoteContent() {
+export default function CreateNote() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const editNoteId = searchParams.get('edit');
@@ -68,7 +68,9 @@ function CreateNoteContent() {
       }
     } else {
       // Create new note
-      const newNote = data;
+      const newNote = { ...data, id: crypto.randomUUID() };
+      // console.log(newNote);
+
       const res = await fetch('/api/notes', {
         method: 'POST',
         headers: {
@@ -78,8 +80,9 @@ function CreateNoteContent() {
       });
 
       const result = await res.json();
+      // console.log(result);
 
-      if (result.id) {
+      if (result.note) {
         toast.success('Note is created Successfully');
         reset();
         router.refresh();
@@ -119,13 +122,5 @@ function CreateNoteContent() {
         </form>
       </div>
     </section>
-  );
-}
-
-export default function CreateNote() {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <CreateNoteContent />
-    </Suspense>
   );
 }
