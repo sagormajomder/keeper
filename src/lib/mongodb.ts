@@ -1,6 +1,6 @@
 import { MongoClient } from 'mongodb';
 
-const uri = process.env.MONGODB_URI;
+const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/KeeperDB';
 
 if (!uri) {
   throw new Error('Please define the MONGODB_URI environment variable');
@@ -8,7 +8,6 @@ if (!uri) {
 
 declare global {
   // Allow global variable in dev to prevent multiple connections
-
   var _mongoClientPromise: Promise<MongoClient> | undefined;
 }
 
