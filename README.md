@@ -34,6 +34,7 @@ In future, some features can be added such as
 - NextJs v16
 - React v19
 - Tailwindcss v4
+- PostgreSql v17
 
 ## Run it Locally
 
@@ -60,7 +61,10 @@ Please follow the below instructions to run this project in your machine:
   // Example .env file
   NODE_ENV=development
   NEXT_PUBLIC_API_URL=http://localhost:3000
-  MONGODB_URI=<get from mongodb>
+  PGHOST=localhost
+  PGDATABASE=<your database name>
+  PGUSER=<database user>
+  PGPASSWORD=<your db password>
   ```
 
 - Run the project
