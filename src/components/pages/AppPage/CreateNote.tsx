@@ -4,11 +4,19 @@ import { Button } from '@/components/ui/button';
 import Heading from '@/components/ui/Heading';
 import { NOTE } from '@/types/type';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
 export default function CreateNote() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <CreateNoteContent />
+    </Suspense>
+  );
+}
+
+function CreateNoteContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const editNoteId = searchParams.get('edit');
@@ -109,7 +117,7 @@ export default function CreateNote() {
               </p>
             )}
             <textarea
-              className='bg-[#eff2fc] dark:bg-primary/10 focus:outline-none focus:ring-1 focus:ring-primary/50 rounded-lg px-5 py-4 w-full min-h-[120px] resize-none text-base placeholder:text-muted-foreground/70'
+              className='bg-[#eff2fc] dark:bg-primary/10 focus:outline-none focus:ring-1 focus:ring-primary/50 rounded-lg px-5 py-4 w-full min-h-30 resize-none text-base placeholder:text-muted-foreground/70'
               placeholder='Take a note'
               {...register('noteContent')}
             />
