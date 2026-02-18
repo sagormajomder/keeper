@@ -6,7 +6,6 @@ export default async function NoteArea() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/notes`);
 
   const notes: NOTE[] = await res.json();
-  // console.log(notes);
 
   return (
     <section className='mb-10'>
@@ -15,9 +14,7 @@ export default async function NoteArea() {
         <p className='text-s1'>Total note: {notes.length}</p>
       </div>
       <ul className='grid gap-6 sm:grid-cols-2 md:grid-cols-3 sm:gap-4 lg:grid-cols-4'>
-        {notes.map(note => (
-          <Note key={note.id} note={note} />
-        ))}
+        {notes.length && notes.map(note => <Note key={note.id} note={note} />)}
       </ul>
     </section>
   );
