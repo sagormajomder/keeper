@@ -10,7 +10,7 @@ const prisma = new PrismaClient({
   adapter,
 });
 
-const noteData: Prisma.noteCreateInput[] = [
+const noteData: Prisma.NoteCreateInput[] = [
   {
     noteTitle: 'This is a default Post',
     noteContent: 'This is default post content',

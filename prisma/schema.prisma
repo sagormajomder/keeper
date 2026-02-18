@@ -13,8 +13,8 @@ datasource db {
   provider = "postgresql"
 }
 
-model note {
-  id          Int      @id @default(autoincrement())
+model Note {
+  id          String   @id @default(uuid())
   noteTitle   String
   noteContent String?
   createdAt   DateTime @default(now())

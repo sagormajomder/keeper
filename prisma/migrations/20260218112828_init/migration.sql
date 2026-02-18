@@ -1,9 +1,9 @@
 -- CreateTable
-CREATE TABLE "note" (
-    "id" SERIAL NOT NULL,
+CREATE TABLE "Note" (
+    "id" TEXT NOT NULL,
     "noteTitle" TEXT NOT NULL,
     "noteContent" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-    CONSTRAINT "note_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Note_pkey" PRIMARY KEY ("id")
 );

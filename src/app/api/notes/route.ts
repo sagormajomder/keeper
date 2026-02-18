@@ -26,17 +26,18 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const insertQuery = `
-      INSERT INTO notes ("noteTitle", "noteContent")
-      VALUES ($1, $2)
-      RETURNING *
-    `;
+    const formatedData = {
+      ...data,
+      createdAt: new Date().toISOString(),
+    };
 
-    const result = await query(insertQuery, [data.noteTitle, data.noteContent]);
+    // console.log(formatedData);
+
+    const result = await prisma.note.create({ data: formatedData });
     // console.log('Server result', result);
 
     return NextResponse.json(
-      { message: 'Note created', note: result.rows[0] },
+      { message: 'Note created', note: result },
       { status: 201 },
     );
   } catch (error) {

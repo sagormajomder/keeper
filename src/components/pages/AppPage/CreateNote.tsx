@@ -34,12 +34,18 @@ function CreateNoteContent() {
       const fetchNote = async () => {
         try {
           const res = await fetch(`/api/notes/${editNoteId}`);
+
           if (res.ok) {
             const data: NOTE = await res.json();
             setValue('noteTitle', data.noteTitle);
             setValue('noteContent', data.noteContent);
           } else {
-            toast.error('Failed to fetch note for editing');
+            const errorData = await res.json();
+            if (errorData) {
+              toast.error(errorData.error);
+            } else {
+              toast.error('Failed to fetch note for editing');
+            }
           }
         } catch (error) {
           console.error(error);
@@ -66,13 +72,18 @@ function CreateNoteContent() {
         body: JSON.stringify(data),
       });
 
-      const result = await res.json();
+      if (res.ok) {
+        const result = await res.json();
 
-      if (result.message) {
-        toast.success('Note Updated Successfully');
-        reset();
-        router.push('/');
-        router.refresh();
+        if (result.message) {
+          toast.success('Note Updated Successfully');
+          reset();
+          router.push('/');
+          router.refresh();
+        }
+      } else {
+        const errorData = await res.json();
+        toast.error(errorData.error);
       }
     } else {
       // Create new note

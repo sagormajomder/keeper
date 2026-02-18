@@ -1,4 +1,4 @@
-import { query } from '@/lib/pgdb';
+import prisma from '@/lib/db';
 import { NextRequest, NextResponse } from 'next/server';
 
 // Get Single Note
@@ -8,15 +8,17 @@ export async function GET(
 ) {
   try {
     const { id } = await context.params;
-    const result = await query('SELECT * FROM notes WHERE id = $1', [id]);
+    const result = await prisma.note.findUnique({
+      where: { id },
+    });
 
     // console.log('sigle NOte', result);
 
-    if (result.rowCount === 0) {
+    if (!result) {
       return NextResponse.json({ error: 'Note not found' }, { status: 404 });
     }
 
-    return NextResponse.json(result.rows[0]);
+    return NextResponse.json(result);
   } catch (error) {
     console.error(error);
     return NextResponse.json(
@@ -36,20 +38,17 @@ export async function PUT(
     const body = await req.json();
     const { noteTitle, noteContent } = body;
 
-    const updateQuery = `
-      UPDATE notes
-      SET "noteTitle" = $1, "noteContent" = $2
-      WHERE id = $3
-      RETURNING *
-    `;
+    const result = await prisma.note.update({
+      where: { id },
+      data: { noteTitle, noteContent },
+    });
+    // console.log(result);
 
-    const result = await query(updateQuery, [noteTitle, noteContent, id]);
-
-    if (result.rowCount === 0) {
+    if (!result) {
       return NextResponse.json({ error: 'Note not found' }, { status: 404 });
     }
 
-    return NextResponse.json({ message: 'Note updated', note: result.rows[0] });
+    return NextResponse.json({ message: 'Note updated', note: result });
   } catch (error) {
     console.error(error);
     return NextResponse.json(
@@ -67,17 +66,17 @@ export async function DELETE(
   try {
     const { id } = await context.params;
 
-    const result = await query('DELETE FROM notes WHERE id = $1 RETURNING *', [
-      id,
-    ]);
+    const result = await prisma.note.delete({
+      where: { id },
+    });
 
     // console.log('Deleted Result', result);
 
-    if (result.rowCount === 0) {
+    if (!result) {
       return NextResponse.json({ error: 'Note not found' }, { status: 404 });
     }
 
-    return NextResponse.json({ message: 'Note deleted', note: result.rows[0] });
+    return NextResponse.json({ message: 'Note deleted', note: result });
   } catch (error) {
     console.error(error);
     return NextResponse.json(
