@@ -61,10 +61,7 @@ Please follow the below instructions to run this project in your machine:
   // Example .env file
   NODE_ENV=development
   NEXT_PUBLIC_API_URL=http://localhost:3000
-  PGHOST=localhost
-  PGDATABASE=<your database name>
-  PGUSER=<database user>
-  PGPASSWORD=<your db password>
+  DATABASE_URL="postgresql://<username>:<password>@<host>:<port>/<db name>"
   ```
 
 - Run the project
