@@ -13,9 +13,15 @@ export default async function NoteArea() {
         <Heading text='All notes' />
         <p className='text-s1'>Total note: {notes.length}</p>
       </div>
-      <ul className='grid gap-6 sm:grid-cols-2 md:grid-cols-3 sm:gap-4 lg:grid-cols-4'>
-        {notes.length && notes.map(note => <Note key={note.id} note={note} />)}
-      </ul>
+      {!notes.length ? (
+        <p>Please create your first note</p>
+      ) : (
+        <ul className='grid gap-6 sm:grid-cols-2 md:grid-cols-3 sm:gap-4 lg:grid-cols-4'>
+          {notes.map(note => (
+            <Note key={note.id} note={note} />
+          ))}
+        </ul>
+      )}
     </section>
   );
 }
