@@ -1,13 +1,13 @@
-import { query } from '@/lib/pgdb';
+import prisma from '@/lib/db';
 import { NOTE } from '@/types/type';
 import { NextRequest, NextResponse } from 'next/server';
 
 // Get All Notes
 export async function GET() {
   try {
-    const result = await query('SELECT * FROM notes ORDER BY "createdAt" DESC');
+    const result = await prisma.note.findMany();
     // console.log('GET Result', result);
-    return NextResponse.json(result.rows, { status: 200 });
+    return NextResponse.json(result, { status: 200 });
   } catch (error) {
     console.error(error);
     return NextResponse.json({ error: 'Failed to get notes' }, { status: 500 });
