@@ -3,7 +3,9 @@ import { NOTE } from '@/types/type';
 import NoteActions from './NoteActions';
 
 export default async function NoteArea() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/notes`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/notes`, {
+    cache: 'no-store',
+  });
 
   const notes: NOTE[] = await res.json();
 
