@@ -6,6 +6,6 @@ export type HeadingProps = {
 export type NOTE = {
   id: string;
   noteTitle: string;
-  noteContent?: string;
+  noteContent?: string | null;
   createdAt: string;
 };
