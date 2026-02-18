@@ -4,12 +4,11 @@ import { NOTE } from '@/types/type';
 import NoteActions from './NoteActions';
 
 export default async function NoteArea() {
-  const notesData = await prisma.note.findMany();
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/notes`, {
+    cache: 'no-store',
+  });
 
-  const notes: NOTE[] = notesData.map(note => ({
-    ...note,
-    createdAt: note.createdAt.toISOString(),
-  }));
+  const notes: NOTE[] = await res.json();
 
   return (
     <section className='mb-10'>
